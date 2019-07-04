@@ -1,0 +1,40 @@
+<form ngForm="form" (submit)="submit()">
+  <div *ngFor="let item of service.forms; let i = index" class="form-group">
+    <label>{{ item.label }}</label>
+<br><br>
+    <div *ngIf="item.options == null">
+      <input [type]="item.type" [name]="item.label" class="form-control" [(ngModel)]="item.answer">
+    </div>
+    <div *ngIf="item.options != null">
+      <!-- <div *ngFor="let col of item.options">
+        <label [for]="item.label">{{ col }}</label>
+        <input [type]="item.type" [name]="item.label" class="form-control" [value]="col">
+      </div> -->
+
+      <!-- <label for="basic-url">Your vanity URL</label> -->
+      <div class="input-group mb-3" *ngFor="let col of item.options">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">{{ col }}</span>
+        </div>
+        <input [type]="item.type" 
+        class="form-control" 
+        [name]="item.label"
+        [value]="col"
+        id="basic-url"
+        (click)="assignValue(col,i)"
+        aria-describedby="basic-addon3">
+      </div>
+
+    </div>
+    <hr>
+
+  </div>
+  <input type="submit" class="btn btn-dark btn-lg" value="Save Answers">
+</form>
+<!-- <form ngForm="form" (submit)="submit()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" [(ngModel)]="service.book.title" name="title" class="form-control">
+  </div>
+  <input type="submit" class="btn btn-dark btn-lg" value="Save Book">
+</form> -->
