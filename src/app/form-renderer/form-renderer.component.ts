@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormService } from '../form.service';
 import { FormInput } from '../form-input.model';
 import { NgForm } from '@angular/forms';
+import { Answer } from '../answer.model';
 
 @Component({
   selector: 'app-form-renderer',
@@ -31,6 +32,17 @@ export class FormRendererComponent implements OnInit {
     answer: ''
   }
 
+  /* aa:Answer = {
+    question: 'what',
+    answer:'yes'
+  }
+  ab:Answer = {
+    question: 'what',
+    answer:'no'
+  }
+  this.service.answers = [this.aa,this.ab];
+ */
+
   ngOnInit() {
     this.service.forms = [this.groupA, this.groupB, this.groupC];
     console.log(this.service.forms);
@@ -53,11 +65,15 @@ export class FormRendererComponent implements OnInit {
   }
   
   submit() {
-   // for(var k = 0;k < this.service.forms.length;k++){
-    // this.service.answers[k].question = this.service.forms[k].label;
-   //  this.service.answers[k].answer = this.service.forms[k].answer;
-    //}
-    console.log(this.service.forms,this.service.answers);
-  }
+    
+//this.service.postAnswers(this.groupA);
+   for(var k = 0;k < this.service.forms.length;k++){
+      delete this.service.forms[k].type;
+      delete this.service.forms[k].options;
+    } 
+    console.log(this.service.forms);
 
+    this.service.postAnswers();
+  }
+  
 }
